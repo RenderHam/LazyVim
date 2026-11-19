@@ -1,7 +1,14 @@
 local opt = vim.opt
 
-opt.shell = "bash"
-opt.clipboard = "unnamedplus"
+-- Use the system clipboard only when a provider is actually installed.
+if
+	vim.fn.executable("wl-copy") == 1
+	or vim.fn.executable("xclip") == 1
+	or vim.fn.executable("xsel") == 1
+then
+	opt.clipboard = "unnamedplus"
+end
+
 opt.termguicolors = true
 
 -- UI

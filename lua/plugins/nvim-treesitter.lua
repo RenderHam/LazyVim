@@ -45,7 +45,16 @@ return {
 	"nvim-treesitter/nvim-treesitter",
 	branch = "main",
 	lazy = false,
-	build = ":TSUpdate",
+	build = function()
+		if vim.fn.executable("tree-sitter") == 1 then
+			vim.cmd("TSUpdate")
+		else
+			vim.notify(
+				"tree-sitter-cli not found; treesitter parsers will not be installed",
+				vim.log.levels.WARN
+			)
+		end
+	end,
 	dependencies = {
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
@@ -88,7 +97,14 @@ return {
 	},
 	config = function()
 		require("nvim-treesitter").setup()
-		require("nvim-treesitter").install(parsers)
+		if vim.fn.executable("tree-sitter") == 1 then
+			require("nvim-treesitter").install(parsers)
+		else
+			vim.notify_once(
+				"Install tree-sitter-cli to enable treesitter highlighting",
+				vim.log.levels.WARN
+			)
+		end
 
 		vim.api.nvim_create_autocmd("FileType", {
 			group = vim.api.nvim_create_augroup("config_treesitter", { clear = true }),

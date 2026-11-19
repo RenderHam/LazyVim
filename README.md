@@ -1,34 +1,58 @@
 # LazyVim
 
 A minimal, professional Neovim setup built on [lazy.nvim](https://github.com/folke/lazy.nvim).
-Requires **Neovim 0.11+** and a Nerd Font.
+Portable across machines: clone it, run one sync command, and Mason installs the rest.
 
-## Install on a new machine
+## Requirements
+
+- **Neovim 0.12+** (treesitter v1 requires it; Arch's `neovim` package is 0.12.6)
+- **git**, **curl**, **tar**, a **C compiler** (`base-devel`)
+- **`tree-sitter-cli` 0.26.1+** for syntax highlighting (Arch: `tree-sitter-cli` in `extra`)
+- A **Nerd Font** for icons
+- Optional: `ripgrep` (faster search), `lazygit` (`<leader>gg`), `wl-clipboard`/`xclip` (system clipboard)
+
+## Fresh install on Arch Linux
 
 ```sh
-# Back up an existing config first, then:
+sudo pacman -S neovim git base-devel curl tar tree-sitter-cli ripgrep lazygit
+# Install/configure a Nerd Font in your terminal as well.
+
+# Back up an existing config first:
+mv ~/.config/nvim ~/.config/nvim.bak
+
 git clone https://github.com/RenderHam/LazyVim.git ~/.config/nvim
 nvim --headless -c 'Lazy sync' -c 'qa!'
 ```
 
-On first launch, Mason installs the configured language servers and CLI tools.
-Check progress with `:Mason`.
+`Lazy sync` clones the pinned plugin versions from `lazy-lock.json`. On the first
+interactive launch, Mason installs the language servers and CLI tools (this can
+take a few minutes). Treesitter parsers are installed in the background on first
+launch; if `tree-sitter-cli` is missing, the config warns and skips them.
+
+The same steps work on any Linux distro with the prerequisites above. No absolute
+paths or machine-specific environment variables are stored in the config.
+
+## Health checks
 
 ```vim
-:Lazy check      " plugin updates
 :checkhealth     " overall health
+:Lazy check      " plugin updates
+:Mason           " installed servers / tools
 :LspInfo         " attached language servers
 :ConformInfo     " available formatters
+:Lint            " run linters for the current buffer
 ```
 
 ## Layout
 
 ```
-init.lua                 leader + entry point
+init.lua                 leader + version guard + entry point
 lua/core/                options, autocmds, keymaps, statusline, lazy bootstrap
 lua/plugins/             one file per plugin
 lsp/<server>.lua         per-server LSP settings (auto-merged by vim.lsp.enable)
 lazy-lock.json           pinned plugin versions
+.stylua.toml             Lua formatting rules
+.editorconfig            whitespace / indentation rules
 ```
 
 ## Tooling
@@ -38,11 +62,11 @@ lazy-lock.json           pinned plugin versions
 | Completion | `blink.cmp` + `LuaSnip` / `friendly-snippets` |
 | LSP | `mason-lspconfig` + `nvim-lspconfig`, see `lsp/` |
 | Formatting | `conform.nvim` (format-on-save) |
-| Linting | `nvim-lint` |
+| Linting | `nvim-lint` (shellcheck, yamllint, markdownlint-cli2) |
 | Diagnostics | `tiny-inline-diagnostic.nvim` + `noice.nvim` |
 | Git | `gitsigns.nvim`, `snacks.lazygit` |
 | Navigation | `snacks.picker`, `mini.files` |
-| Syntax | `nvim-treesitter` |
+| Syntax | `nvim-treesitter` (v1) + textobjects |
 
 ## Keymaps
 
