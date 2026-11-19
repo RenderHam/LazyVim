@@ -6,35 +6,27 @@ return {
 		require("lazywal").setup({
 			generator = "auto",
 
-			-- This is the single place to adjust the colors.
-			-- Each slot blends toward the background: 0 = invisible, 100 = raw
-			-- palette color from hellwal/pywall.
-			percentages = {
-				color0 = 100,
-				color1 = 85, -- errors: fiery but not blinding
-				color2 = 75, -- strings: softened
-				color3 = 85, -- warnings / numbers
-				color4 = 90, -- functions
-				color5 = 80, -- keywords
-				color6 = 80, -- types
-				color7 = 100, -- foreground: untouched
-				color8 = 100,
-				color9 = 85,
-				color10 = 75,
-				color11 = 85,
-				color12 = 90,
-				color13 = 80,
-				color14 = 80,
-				color15 = 100,
+			-- This is the single place to choose colors.
+			-- Any role can be set to a palette slot (color0..color15,
+			-- background, foreground, cursor) or a raw "#rrggbb" value.
+			-- Colors are used exactly as generated — no blending.
+			--
+			-- Run :LazywalRoles to see the full resolved mapping.
+			roles = {
+				-- comment = "color1",       -- comments use color1
+				-- string  = "color2",
+				-- func    = "color4",
+				-- error   = "color9",       -- bright variant
+				-- warn    = "#ffaa00",      -- raw color override
 			},
 
 			transparent = false,
 			terminal_colors = true,
 			styles = { comments = { italic = true } },
 
-			-- Per-group fine tuning, if needed:
+			-- Final escape hatch for individual highlight groups:
 			-- overrides = function(colors)
-			-- 	return { Comment = { fg = colors.grey, italic = true } }
+			-- 	return { Comment = { fg = colors.comment, italic = true } }
 			-- end,
 		})
 	end,

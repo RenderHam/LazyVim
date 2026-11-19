@@ -77,30 +77,34 @@ your wallpaper. It reads `~/.cache/hellwal/colors-wal.vim` or
 built-in palette when neither exists. lazy.nvim installs it like any other plugin
 into `~/.local/share/nvim/lazy/lazywal`.
 
-Each ANSI slot has a **blend percentage toward the background**: `0` = invisible,
-`100` = pure palette color. This lets you tame aggressive wallpaper colors without
-changing their hue. Adjust them in `lua/plugins/lazywal.lua` — that file is the
-single place for color configuration:
+Colors are used **exactly as generated**. You freely choose which palette slot each
+logical role uses (comments, strings, functions, diagnostics, …), or supply a raw
+hex value. Configure it in `lua/plugins/lazywal.lua` — that file is the single place
+for color configuration:
 
 ```lua
 require("lazywal").setup({
-  percentages = {
-    color1 = 85,  -- errors stay fiery but not blinding
-    color2 = 75,  -- strings softened
-    color7 = 100, -- foreground untouched
+  roles = {
+    comment = "color1",   -- comments use color1
+    string  = "color2",
+    error   = "color9",   -- bright variant
+    warn    = "#ffaa00",  -- raw color override
   },
 })
 ```
 
+Run `:LazywalRoles` to see every role, its configured target, and the resolved color.
+
 | Command | Action |
 | --- | --- |
-| `:LazywalPreview` | Show the 16 adjusted colors with their percentages |
-| `:LazywalSet color1 80` | Change one percentage live and reapply |
+| `:LazywalRoles` | Show every role and the color it resolves to |
+| `:LazywalPreview` | Show the 16 palette slots |
 | `:LazywalReload` | Re-read the generator output and reapply |
 
-The adjusted palette is also exported as `g:terminal_color_0..15`, so your terminal
-matches the editor. Highlights are cached to `~/.cache/nvim/lazywal_theme.json` and
-invalidated when the palette file or your options change.
+The palette is exported to `g:lazywal_palette`, resolved roles to
+`g:lazywal_roles`, and terminal colors to `g:terminal_color_0..15`. Highlights are
+cached to `~/.cache/nvim/lazywal_theme.json` and invalidated when the palette file
+or your options change.
 
 ## Keymaps
 
