@@ -6,55 +6,22 @@ return {
 		require("lazywal").setup({
 			generator = "auto",
 
-			-- This is the single place to choose colors.
-			-- Each value is a palette slot (color0..color15, background,
-			-- foreground, cursor) or a raw "#rrggbb" value.
+			-- Choose colors here. Values are palette slots (color0..color15,
+			-- background, foreground, cursor) or a raw "#rrggbb" value.
 			-- Colors are used exactly as generated - no blending.
-			-- Run :LazywalRoles to see the resolved mapping.
+			-- Any role not listed here keeps the plugin default.
+			-- Run :LazywalRoles to see every resolved role.
 			roles = {
-				-- Base
-				bg = "background",
-				fg = "foreground",
-				bg_alt = "color8",
-				subtle = "color8", -- muted UI text (NonText, Conceal, Folded, blame, ghost text)
+				subtle = "color8",
 				selection = "color8",
-
-				-- Syntax
 				comment = "color8",
 				string = "color2",
-				number = "color3", -- numbers, floats, booleans
-				constant = "color6",
-				variable = "foreground",
-				parameter = "foreground",
-				property = "foreground",
+				number = "color3",
 				func = "color4",
-				method = "color4", -- methods are now independent from functions
+				method = "color4",
 				keyword = "color5",
 				operator = "color5",
-				exception = "color9",
-				type = "color6",
-				tag = "color4",
-				punctuation = "foreground",
-				special = "color3",
-
-				-- Diagnostics
 				error = "color1",
-				warn = "color3",
-				info = "color4",
-				hint = "color6",
-				ok = "color2",
-
-				-- UI
-				search = "color3",
-				linenr = "color8",
-				border = "color8",
-				heading = "color4",
-				link = "color6",
-				diff_add = "color2",
-				diff_change = "color3",
-				diff_delete = "color1",
-				menu_sel_fg = "background",
-				menu_sel_bg = "color4",
 			},
 
 			transparent = false,
