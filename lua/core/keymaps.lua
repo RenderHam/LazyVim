@@ -75,7 +75,6 @@ map("n", "<leader>fc", function() snacks.picker.grep_word() end, { desc = "Find 
 map("n", "<leader>fb", function() snacks.picker.buffers({ layout = { preset = "select" }}) end, { desc = "Fuzzy find buffers" })
 map("n", "<leader>ft", function() snacks.picker() end, { desc = "Other pickers..." })
 map("n", "<leader>fh", function() snacks.picker.help() end, { desc = "Find help tags" })
-map("n", "<leader>fS", function() require("pick-resession").pick() end, { desc = "Find Session" })
 
 -- toggle options
 -- utils.toggle_global_boolean("autoformat", "Autoformat"):map("<leader>ta")
@@ -113,7 +112,7 @@ map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
 -- map("n", "<leader>w<", "<C-W><", { desc = "Shring one column", remap = true })
 -- map("n", "<leader>w>", "<C-W>>", { desc = "Expand one column", remap = true })
-map("n", "<leader>wt", ":vsplit term://", { desc = "Window open terminaal bottom", remap = true })
+map("n", "<leader>wt", ":vsplit term://", { desc = "Open terminal in split", remap = true })
 map("n", "<leader>wz", function() snacks.zen() end, { desc = "Zen mode" })
 
 -- tabs
@@ -124,9 +123,13 @@ map("n", "<leader><tab>h", ":tabprevious<cr>", { desc = "Previous Tab" })
 
 -- Code/LSP
 map("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
-map("n", "<leader>cd", function() vim.diagnostic.open_float({border = 'rounded'}) end, { desc = "Line Diagnostics" })
-map("n", "<leader>cli", ":check lsp<cr>", { desc = "LSP Info" })
+map("n", "<leader>cf", function()
+	require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format buffer" })
+map("n", "<leader>cd", function() vim.diagnostic.open_float({ border = "rounded" }) end, { desc = "Line Diagnostics" })
+map("n", "<leader>cli", ":LspInfo<cr>", { desc = "LSP Info" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
+map("n", "<leader>xd", vim.diagnostic.setqflist, { desc = "Diagnostics to quickfix" })
 -- map("n", "<leader>clr", utils.restart_lsp, { desc = "Restart LSP" })
 -- map("n", "<leader>cll", utils.open_lsp_log, { desc = "Open LSP Log" })
 map("n", "K", function() return vim.lsp.buf.hover() end, { desc = "Hover" })

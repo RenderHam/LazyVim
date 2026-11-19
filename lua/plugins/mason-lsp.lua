@@ -1,7 +1,6 @@
 return {
 	"mason-org/mason-lspconfig.nvim",
 	lazy = false,
-	build = ":MasonUpdate",
 	dependencies = {
 		{
 			"mason-org/mason.nvim",
@@ -14,27 +13,46 @@ return {
 			},
 		},
 		"neovim/nvim-lspconfig",
+		{
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			opts = {
+				auto_update = false,
+				ensure_installed = {
+					-- Formatters
+					"stylua",
+					"prettier",
+					"shfmt",
+					"goimports",
+					"taplo",
+					"php-cs-fixer",
+					-- Linters
+					"shellcheck",
+					"luacheck",
+					"yamllint",
+					"markdownlint-cli2",
+				},
+			},
+		},
 	},
-	config = function()
-		require("mason-lspconfig").setup({
-			ensure_installed = {
-				"lua_ls",
-				"rust_analyzer",
-				"bashls",
-				"clangd",
-				"taplo",
-				"templ",
-				"yamlls",
-				"jqls",
-				"stylua",
-				"phpactor",
-			},
-			automatic_enable = {
-				--Install em first
-				-- exclude = {
-				-- 	"ts_ls",
-				-- },
-			},
-		})
-	end,
+	opts = {
+		-- Language servers. Custom settings live in `lsp/<server>.lua`.
+		ensure_installed = {
+			"bashls",
+			"clangd",
+			"gopls",
+			"html",
+			"jsonls",
+			"jqls",
+			"lua_ls",
+			"phpactor",
+			"rust_analyzer",
+			"tailwindcss",
+			"taplo",
+			"templ",
+			"ts_ls",
+			"yamlls",
+		},
+		-- Enable every installed server; dartls is managed by flutter-tools.
+		automatic_enable = { exclude = { "dartls" } },
+	},
 }

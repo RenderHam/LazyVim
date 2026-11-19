@@ -1,44 +1,54 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.g.user = os.getenv("USERNAME") or os.getenv("USER")
-vim.g.lazyvim_prettier_needs_config = false
-
 local opt = vim.opt
-opt.shell = "bash"
 
--- vim.lsp.inline_completion.enable(true)
--- UI/General
+opt.shell = "bash"
+opt.clipboard = "unnamedplus"
+opt.termguicolors = true
+
+-- UI
 opt.number = true
 opt.relativenumber = true
-opt.ignorecase = true
 opt.cursorline = true
-opt.clipboard = "unnamedplus"
-opt.termguicolors = false
-opt.confirm = true
+opt.signcolumn = "yes"
+opt.showmode = false -- noice.nvim takes over
+opt.showtabline = 0
+opt.laststatus = 3
 opt.mouse = "a"
+opt.fillchars:append({ eob = " " })
+
+-- Search
+opt.ignorecase = true
+opt.smartcase = true
+opt.hlsearch = true
+
+-- Editing
+opt.confirm = true
 opt.undofile = true
 opt.swapfile = false
-opt.conceallevel = 1
 opt.scrolloff = 12
-opt.wrap = true
+opt.wrap = false
 opt.linebreak = true
+opt.breakindent = true
+opt.breakindentopt = "shift:2"
+opt.showbreak = "↳"
+opt.conceallevel = 1
 opt.spelllang = "en_nz"
-opt.showtabline = 0
-opt.fillchars:append({ eob = " " })
--- Set statusline
-opt.laststatus = 3
-opt.statusline = require("core.statusline").statusline
 
--- Set tab width
+-- Windows and timing
+opt.splitright = true
+opt.splitbelow = true
+opt.updatetime = 250
+opt.timeoutlen = 400
+
+-- Indentation
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
 opt.autoindent = true
-opt.breakindent = true
-opt.breakindentopt = "shift:2"
-opt.showbreak = "↳"
 
--- Make cursor blink
+-- Statusline
+opt.statusline = require("core.statusline").statusline
+
+-- Cursor
 opt.guicursor = {
 	"n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50",
 	"a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor",

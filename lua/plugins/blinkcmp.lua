@@ -1,53 +1,39 @@
 return {
 	"saghen/blink.cmp",
 	event = "InsertEnter",
-	dependencies = "rafamadriz/friendly-snippets",
 	version = "v1.*",
-	config = function()
-		local is_enabled = function()
-			local disabled_ft = {
-				"TelescopePrompt",
-				"grug-far",
-			}
+	dependencies = {
+		"L3MON4D3/LuaSnip",
+		"rafamadriz/friendly-snippets",
+	},
+	opts = {
+		keymap = { preset = "default" },
+		sources = {
+			completion = {
+				enabled_providers = { "lsp", "path", "snippets", "buffer" },
+			},
+		},
+		snippets = { preset = "luasnip" },
+		signature = { enabled = true },
+		cmdline = { completion = { menu = { auto_show = true } } },
+		completion = {
+			menu = {
+				scrollbar = false,
+				border = "rounded",
+			},
+			documentation = {
+				auto_show = true,
+				window = { border = "rounded" },
+			},
+		},
+	},
+	config = function(_, opts)
+		opts.enabled = function()
+			local disabled_ft = { "TelescopePrompt", "grug-far" }
 			return not vim.tbl_contains(disabled_ft, vim.bo.filetype)
 				and vim.b.completion ~= false
 				and vim.bo.buftype ~= "prompt"
 		end
-
-		require("blink.cmp").setup({
-			enabled = is_enabled,
-			cmdline = { completion = { menu = { auto_show = true } } },
-			completion = {
-				menu = {
-					scrollbar = false,
-					auto_show = is_enabled,
-					border = {
-						{ "󱐋", "WarningMsg" },
-						"─",
-						"╮",
-						"│",
-						"╯",
-						"─",
-						"╰",
-						"│",
-					},
-				},
-				documentation = {
-					auto_show = true,
-					window = {
-						border = {
-							{ "", "DiagnosticHint" },
-							"─",
-							"╮",
-							"│",
-							"╯",
-							"─",
-							"╰",
-							"│",
-						},
-					},
-				},
-			},
-		})
+		require("blink.cmp").setup(opts)
 	end,
 }

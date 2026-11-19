@@ -1,14 +1,11 @@
 return {
-	"mskelton/flutter.nvim",
-	config = function()
-		require("flutter-tools").setup({
-			hot_reload = false, -- Hot reload automatically on save
-			lsp = {
-				capabilities = function(capabilities)
-					capabilities.specificThingIDontWant = false
-					return capabilities
-				end,
-			},
-		})
-	end,
+	"nvim-flutter/flutter-tools.nvim",
+	ft = "dart",
+	dependencies = { "nvim-lua/plenary.nvim" },
+	opts = {
+		lsp = {
+			color = { enabled = true },
+		},
+		debugger = { enabled = false },
+	},
 }
