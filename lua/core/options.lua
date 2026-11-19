@@ -28,6 +28,8 @@ opt.smartcase = true
 opt.hlsearch = true
 
 -- Editing
+opt.foldenable = true
+opt.foldlevelstart = 99 -- keep folds available but open by default
 opt.confirm = true
 opt.undofile = true
 opt.swapfile = false

@@ -24,7 +24,7 @@ return {
 				error = "color1",
 			},
 
-			transparent = false,
+			transparent = true,
 			terminal_colors = true,
 			styles = { comments = { italic = true } },
 
