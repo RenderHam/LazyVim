@@ -9,7 +9,7 @@ Portable across machines: clone it, run one sync command, and Mason installs the
 - **git**, **curl**, **tar**, a **C compiler** (`base-devel`)
 - **`tree-sitter-cli` 0.26.1+** for syntax highlighting (Arch: `tree-sitter-cli` in `extra`)
 - A **Nerd Font** for icons
-- Optional: `ripgrep` (faster search), `lazygit` (`<leader>gg`), `wl-clipboard`/`xclip` (system clipboard)
+- Optional: `hellwal` or `pywall` (wallpaper palette source for the colorscheme), `ripgrep` (faster search), `lazygit` (`<leader>gg`), `wl-clipboard`/`xclip` (system clipboard)
 
 ## Fresh install on Arch Linux
 
@@ -67,6 +67,39 @@ lazy-lock.json           pinned plugin versions
 | Git | `gitsigns.nvim`, `snacks.lazygit` |
 | Navigation | `snacks.picker`, `mini.files` |
 | Syntax | `nvim-treesitter` (v1) + textobjects |
+| Colorscheme | `wal.nvim` (local plugin: hellwal/pywall palette + per-color blend) |
+
+## Colorscheme: `wal.nvim`
+
+A local plugin (`lua/wal/`, entry point `colors/wal.vim`) that replaces a hard-coded
+palette with the one generated from your wallpaper. It reads
+`~/.cache/hellwal/colors-wal.vim` or `~/.cache/wal/colors.json` (override with
+`palette_path`) and falls back to a built-in palette when neither exists.
+
+Each ANSI slot has a **blend percentage toward the background**: `0` = invisible,
+`100` = pure palette color. This lets you tame aggressive wallpaper colors without
+changing their hue. Defaults live in `lua/wal/config.lua`; tune them in
+`lua/core/init.lua`:
+
+```lua
+require("wal").setup({
+  percentages = {
+    color1 = 85,  -- errors stay fiery but not blinding
+    color2 = 75,  -- strings softened
+    color7 = 100, -- foreground untouched
+  },
+})
+```
+
+| Command | Action |
+| --- | --- |
+| `:WalPreview` | Show the 16 adjusted colors with their percentages |
+| `:WalSet color1 80` | Change one percentage live and reapply |
+| `:WalReload` | Re-read the generator output and reapply |
+
+The adjusted palette is also exported as `g:terminal_color_0..15`, so your terminal
+matches the editor. Highlights are cached to `~/.cache/nvim/wal_theme.json` and
+invalidated when the palette file or your options change.
 
 ## Keymaps
 
