@@ -6,41 +6,36 @@ return {
 		require("conform").setup({
 			formatters_by_ft = {
 				css = { "prettier" },
-				go = { "goimports_reviser", "gofmt" },
+				-- go = { "goimports_reviser", "gofmt" },
 				html = { "prettier" },
 				javascript = { "prettier" },
-				typescript = { "prettier" },
+				typescript = { "ts_ls" },
 				json = { "prettier" },
 				lua = { "stylua" },
 				markdown = { "prettier" },
-				nix = { "nixfmt" },
-				python = { "black" },
-				rust = { "rustfmt" },
+				-- rust = { "rustfmt" },
 				scss = { "prettier" },
 				sh = { "shfmt" },
-				templ = { "templ" },
+				-- templ = { "templ" },
 				toml = { "taplo" },
 				yaml = { "prettier" },
-				php = { "pretty-php" },
+				php = { "php_cs_fixer" },
+				go = { "gopls" },
 			},
 
 			format_after_save = function()
 				if not vim.g.autoformat then
 					return
 				else
-					if vim.bo.filetype == "ps1" then
-						vim.lsp.buf.format()
-						return
-					end
 					return { lsp_format = "fallback" }
 				end
 			end,
 
 			formatters = {
-				goimports_reviser = {
-					command = "goimports-reviser",
-					args = { "-output", "stdout", "$FILENAME" },
-				},
+				-- goimports_reviser = {
+				-- 	command = "goimports-reviser",
+				-- 	args = { "-output", "stdout", "$FILENAME" },
+				-- },
 			},
 		})
 	end,
