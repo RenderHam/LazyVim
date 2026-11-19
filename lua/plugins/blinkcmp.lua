@@ -9,9 +9,7 @@ return {
 	opts = {
 		keymap = { preset = "default" },
 		sources = {
-			completion = {
-				enabled_providers = { "lsp", "path", "snippets", "buffer" },
-			},
+			default = { "lsp", "path", "snippets", "buffer" },
 		},
 		snippets = { preset = "luasnip" },
 		signature = { enabled = true },
