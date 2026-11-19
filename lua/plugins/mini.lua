@@ -29,7 +29,6 @@ return {
 					"mason",
 					"notify",
 					"snacks_terminal",
-					"dashboard",
 				},
 				callback = function()
 					vim.b.miniindentscope_disable = true

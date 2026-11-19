@@ -1,4 +1,4 @@
 return {
-    "SmiteshP/nvim-navic",
-    event = { "BufReadPre", "BufNewFile" },
+	"SmiteshP/nvim-navic",
+	event = { "BufReadPre", "BufNewFile" },
 }

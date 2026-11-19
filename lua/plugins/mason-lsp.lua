@@ -27,7 +27,6 @@ return {
 					"php-cs-fixer",
 					-- Linters
 					"shellcheck",
-					"luacheck",
 					"yamllint",
 					"markdownlint-cli2",
 				},
@@ -52,7 +51,6 @@ return {
 			"ts_ls",
 			"yamlls",
 		},
-		-- Enable every installed server; dartls is managed by flutter-tools.
-		automatic_enable = { exclude = { "dartls" } },
+		automatic_enable = true,
 	},
 }

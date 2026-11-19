@@ -4,10 +4,10 @@ return {
 	config = function()
 		local lint = require("lint")
 
+		-- Lua diagnostics are provided by lua_ls.
 		lint.linters_by_ft = {
 			bash = { "shellcheck" },
-			lua = { "luacheck" },
-			markdown = { "markdownlint" },
+			markdown = { "markdownlint-cli2" },
 			sh = { "shellcheck" },
 			yaml = { "yamllint" },
 		}

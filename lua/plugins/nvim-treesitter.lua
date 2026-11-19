@@ -51,6 +51,8 @@ return {
 		},
 		ensure_installed = {
 			"bash",
+			"c",
+			"cpp",
 			"css",
 			"c_sharp",
 			"gitignore",

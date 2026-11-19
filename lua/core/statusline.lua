@@ -256,13 +256,6 @@ M.location = function(hl)
 	return format_component("%l:%c", hl)
 end
 
---- Clock component - show current time
---- @param hl string|nil The highlight group to use
-M.clock = function(hl)
-	--- @diagnostic disable-next-line: param-type-mismatch
-	return format_component(os.date("%I:%M %p"):gsub("^0", ""), hl)
-end
-
 -- Statusline components
 local components = {
 	component("mode"),
@@ -279,7 +272,6 @@ local components = {
 	component("other_buffers", "Comment"),
 	component("progress", "Special"),
 	component("location", "Changed"),
-	component("clock", "Conceal"),
 }
 
 --- Return the statusline as a concatenated string - use with vim.opt.statusline to set

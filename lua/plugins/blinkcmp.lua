@@ -27,10 +27,7 @@ return {
 	},
 	config = function(_, opts)
 		opts.enabled = function()
-			local disabled_ft = { "TelescopePrompt", "grug-far" }
-			return not vim.tbl_contains(disabled_ft, vim.bo.filetype)
-				and vim.b.completion ~= false
-				and vim.bo.buftype ~= "prompt"
+			return vim.b.completion ~= false and vim.bo.buftype ~= "prompt"
 		end
 		require("blink.cmp").setup(opts)
 	end,

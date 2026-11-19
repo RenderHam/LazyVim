@@ -3,13 +3,6 @@ return {
 	event = "VeryLazy",
 	priority = 1000,
 	config = function()
-		require("tiny-inline-diagnostic").setup()
-		vim.diagnostic.config({
-			signs = true,
-			underline = false,
-			update_in_insert = true,
-			virtual_text = false,
-		})
 		require("tiny-inline-diagnostic").setup({
 			preset = "modern",
 			transparent_bg = false,

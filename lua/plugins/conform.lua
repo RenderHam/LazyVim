@@ -10,7 +10,6 @@ return {
 		formatters_by_ft = {
 			["_"] = { "trim_whitespace" },
 			css = { "prettier" },
-			dart = { "dart_format" },
 			go = { "goimports", "gofmt" },
 			html = { "prettier" },
 			javascript = { "prettier" },

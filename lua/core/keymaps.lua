@@ -1,4 +1,3 @@
--- local utils = require("core.utils")
 local snacks = require("snacks")
 
 --- Map a key combination to a command
@@ -58,7 +57,6 @@ map("v", "<A-j>", ":<C-u>execute \"'<,'>move '>+\" . v:count1<cr>gv=gv", { desc 
 map("v", "<A-k>", ":<C-u>execute \"'<,'>move '<-\" . (v:count1 + 1)<cr>gv=gv", { desc = "Move Up" })
 
 -- Buffers
--- map("n", "<leader>bb", function() utils.switch_to_other_buffer() end, { desc = "Switch to Other Buffer" })
 map("n", "<leader>bd", function() snacks.bufdelete({ wipe = true }) end, { desc = "Delete buffer" })
 map("n", "L", ":bnext<cr>", { desc = "Next buffer" })
 map("n", "H", ":bprevious<cr>", { desc = "Previous buffer" })
@@ -77,8 +75,6 @@ map("n", "<leader>ft", function() snacks.picker() end, { desc = "Other pickers..
 map("n", "<leader>fh", function() snacks.picker.help() end, { desc = "Find help tags" })
 
 -- toggle options
--- utils.toggle_global_boolean("autoformat", "Autoformat"):map("<leader>ta")
--- utils.toggle_global_boolean("obsidian_git_sync", "Obsidian Git Sync"):map("<leader>to")
 snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>ts")
 snacks.toggle.option("wrap", { name = "Wrap" }):map("<leader>tw")
 snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>tL")
@@ -110,8 +106,6 @@ map("n", "<leader>ww", "<C-W>p", { desc = "Other window", remap = true })
 map("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = true })
 map("n", "<leader>w|", "<C-W>v", { desc = "Split window right", remap = true })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below", remap = true })
--- map("n", "<leader>w<", "<C-W><", { desc = "Shring one column", remap = true })
--- map("n", "<leader>w>", "<C-W>>", { desc = "Expand one column", remap = true })
 map("n", "<leader>wt", ":vsplit term://", { desc = "Open terminal in split", remap = true })
 map("n", "<leader>wz", function() snacks.zen() end, { desc = "Zen mode" })
 
@@ -130,8 +124,6 @@ map("n", "<leader>cd", function() vim.diagnostic.open_float({ border = "rounded"
 map("n", "<leader>cli", ":LspInfo<cr>", { desc = "LSP Info" })
 map("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Rename" })
 map("n", "<leader>xd", vim.diagnostic.setqflist, { desc = "Diagnostics to quickfix" })
--- map("n", "<leader>clr", utils.restart_lsp, { desc = "Restart LSP" })
--- map("n", "<leader>cll", utils.open_lsp_log, { desc = "Open LSP Log" })
 map("n", "K", function() return vim.lsp.buf.hover() end, { desc = "Hover" })
 map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
 map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
@@ -143,10 +135,7 @@ map("n", "gy", function() snacks.picker.lsp_type_definitions() end, { desc = "Go
 -- Terminal/Run...
 map({"n", "t"}, "<C-\\>", function() snacks.terminal() end, { desc = "Toggle Terminal" })
 map("n", "<leader>gg", function() snacks.lazygit() end, { desc = "Lazygit" })
--- map("n", "<leader>kk", function() utils.open_terminal_toggle({ "k9s" }, true) end, { desc = "K9s" })
--- map("n", "<leader>ao", function() utils.open_terminal_toggle({ "opencode", "." }) end, { desc = "Opencode" })
 map("n", "<leader>rlf", ":luafile %<cr>", { desc = "Run Current Lua File" })
-map("n", "<leader>rlt", ":PlenaryBustedFile %<cr>", { desc = "Run Lua Test File" })
 map("n", "<leader>rss", run_non_interactive_cmd(vim.fn.expand("%:p")), { desc = "Run shell script" })
 map("n", "<leader>rm", run_non_interactive_cmd("make"), { desc = "Run make" })
 map("n", "<leader>rt", run_non_interactive_cmd("task"), { desc = "Run task" })
