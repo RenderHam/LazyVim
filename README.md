@@ -74,13 +74,13 @@ lazy-lock.json           pinned plugin versions
 A standalone plugin that replaces a hard-coded palette with the one generated from
 your wallpaper. It reads `~/.cache/hellwal/colors-wal.vim` or
 `~/.cache/wal/colors.json` (override with `palette_path`) and falls back to a
-built-in palette when neither exists. lazy.nvim uses your local checkout at
-`~/.git/lazywal` when present, and clones from GitHub everywhere else.
+built-in palette when neither exists. lazy.nvim installs it like any other plugin
+into `~/.local/share/nvim/lazy/lazywal`.
 
 Each ANSI slot has a **blend percentage toward the background**: `0` = invisible,
 `100` = pure palette color. This lets you tame aggressive wallpaper colors without
-changing their hue. Defaults live in the plugin's `lua/lazywal/config.lua`; override
-them in `lua/plugins/lazywal.lua`:
+changing their hue. Adjust them in `lua/plugins/lazywal.lua` — that file is the
+single place for color configuration:
 
 ```lua
 require("lazywal").setup({
@@ -97,8 +97,6 @@ require("lazywal").setup({
 | `:LazywalPreview` | Show the 16 adjusted colors with their percentages |
 | `:LazywalSet color1 80` | Change one percentage live and reapply |
 | `:LazywalReload` | Re-read the generator output and reapply |
-
-`:WalPreview`, `:WalSet`, and `:WalReload` remain as short aliases.
 
 The adjusted palette is also exported as `g:terminal_color_0..15`, so your terminal
 matches the editor. Highlights are cached to `~/.cache/nvim/lazywal_theme.json` and
