@@ -20,7 +20,7 @@ require("lazy").setup({
 	-- param 2
 	install = {
 		missing = true,
-		colorscheme = { "wal" },
+		colorscheme = { "lazywal" },
 	},
 	ui = {
 		title = " lazy.nvim 💤",

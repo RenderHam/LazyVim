@@ -67,22 +67,23 @@ lazy-lock.json           pinned plugin versions
 | Git | `gitsigns.nvim`, `snacks.lazygit` |
 | Navigation | `snacks.picker`, `mini.files` |
 | Syntax | `nvim-treesitter` (v1) + textobjects |
-| Colorscheme | `wal.nvim` (local plugin: hellwal/pywall palette + per-color blend) |
+| Colorscheme | [`lazywal`](https://github.com/RenderHam/lazywal) (hellwal/pywall palette + per-color blend) |
 
-## Colorscheme: `wal.nvim`
+## Colorscheme: [lazywal](https://github.com/RenderHam/lazywal)
 
-A local plugin (`lua/wal/`, entry point `colors/wal.vim`) that replaces a hard-coded
-palette with the one generated from your wallpaper. It reads
-`~/.cache/hellwal/colors-wal.vim` or `~/.cache/wal/colors.json` (override with
-`palette_path`) and falls back to a built-in palette when neither exists.
+A standalone plugin that replaces a hard-coded palette with the one generated from
+your wallpaper. It reads `~/.cache/hellwal/colors-wal.vim` or
+`~/.cache/wal/colors.json` (override with `palette_path`) and falls back to a
+built-in palette when neither exists. lazy.nvim uses your local checkout at
+`~/.git/lazywal` when present, and clones from GitHub everywhere else.
 
 Each ANSI slot has a **blend percentage toward the background**: `0` = invisible,
 `100` = pure palette color. This lets you tame aggressive wallpaper colors without
-changing their hue. Defaults live in `lua/wal/config.lua`; tune them in
-`lua/core/init.lua`:
+changing their hue. Defaults live in the plugin's `lua/lazywal/config.lua`; override
+them in `lua/plugins/lazywal.lua`:
 
 ```lua
-require("wal").setup({
+require("lazywal").setup({
   percentages = {
     color1 = 85,  -- errors stay fiery but not blinding
     color2 = 75,  -- strings softened
@@ -93,12 +94,14 @@ require("wal").setup({
 
 | Command | Action |
 | --- | --- |
-| `:WalPreview` | Show the 16 adjusted colors with their percentages |
-| `:WalSet color1 80` | Change one percentage live and reapply |
-| `:WalReload` | Re-read the generator output and reapply |
+| `:LazywalPreview` | Show the 16 adjusted colors with their percentages |
+| `:LazywalSet color1 80` | Change one percentage live and reapply |
+| `:LazywalReload` | Re-read the generator output and reapply |
+
+`:WalPreview`, `:WalSet`, and `:WalReload` remain as short aliases.
 
 The adjusted palette is also exported as `g:terminal_color_0..15`, so your terminal
-matches the editor. Highlights are cached to `~/.cache/nvim/wal_theme.json` and
+matches the editor. Highlights are cached to `~/.cache/nvim/lazywal_theme.json` and
 invalidated when the palette file or your options change.
 
 ## Keymaps
