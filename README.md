@@ -67,6 +67,7 @@ lazy-lock.json           pinned plugin versions
 | Git | `gitsigns.nvim`, `snacks.lazygit` |
 | Navigation | `snacks.picker`, `mini.files` |
 | Syntax | `nvim-treesitter` (v1) + textobjects |
+| Markdown | `render-markdown.nvim` (in-buffer rendering, tree-sitter based) |
 | Colorscheme | [`lazywal`](https://github.com/RenderHam/lazywal) (hellwal/pywall palette + per-color blend) |
 
 ## Colorscheme: [lazywal](https://github.com/RenderHam/lazywal)
@@ -124,4 +125,5 @@ or your options change.
 | `<leader>gg` | Lazygit |
 | `<C-\>` | Toggle terminal |
 | `<leader>ts` / `<leader>tw` / `<leader>td` | Toggle spelling / wrap / diagnostics |
+| `<leader>tm` | Toggle markdown rendering |
 | `<leader>qq` | Quit all |
